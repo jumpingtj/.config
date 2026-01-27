@@ -1,0 +1,121 @@
+start-at-login = true
+enable-normalization-flatten-containers = true
+enable-normalization-opposite-orientation-for-nested-containers = true
+accordion-padding = 0
+default-root-container-layout = 'tiles'
+default-root-container-orientation = 'auto'
+key-mapping.preset = 'qwerty'
+on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+
+# Run Sketchybar together with AeroSpace
+# sketchybar has a built-in detection of already running process,
+# so it won't be run twice on AeroSpace restart
+after-startup-command = [
+	'exec-and-forget sketchybar',
+]
+
+
+# Notify Sketchybar about workspace change
+exec-on-workspace-change = ['/bin/bash', '-c',
+    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
+]
+
+[gaps]
+inner.horizontal = 0
+inner.vertical = 0
+outer.left = 0
+outer.bottom = 0
+outer.top = 0
+outer.right = 0
+
+[mode.main.binding]
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout tiles horizontal horizontal'
+alt-cmd-m = 'resize smart -50'
+alt-cmd-i = 'resize smart +50'
+alt-shift-h = 'move-mouse monitor-force-center'
+
+alt-ctrl-h = 'focus left'
+alt-ctrl-j = 'focus down'
+alt-ctrl-k = 'focus up'
+alt-ctrl-l = 'focus right'
+
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+
+alt-j = ['workspace j', 'exec-and-forget open -a kitty']
+alt-k = ['workspace k', 'exec-and-forget open -a Zen']
+alt-semicolon = ['workspace ;', 'exec-and-forget open -a "Home Assistant"']
+alt-g = ['workspace g', 'exec-and-forget open -a Messages']
+alt-f = ['workspace f', 'exec-and-forget open -a WhatsApp']
+alt-p = ['workspace p', 'exec-and-forget open -a 1Password']
+alt-v = ['workspace v', 'exec-and-forget open -a Finder']
+alt-s = ['workspace s', 'exec-and-forget open -a Settings']
+alt-shift-equal = ['workspace +', 'exec-and-forget open -a "Tor Browser"']
+alt-o = ['workspace o', 'exec-and-forget open -a ChatGPT']
+
+
+
+alt-a = 'mode service'
+alt-r = 'mode resize'
+
+[[on-window-detected]]
+if.app-id = 'net.kovidgoyal.kitty'
+run = 'move-node-to-workspace j' 
+
+[[on-window-detected]]
+if.app-id = 'app.zen-browser.zen'
+run = 'move-node-to-workspace k' 
+
+[[on-window-detected]]
+if.app-id = 'io.robbie.HomeAssistant'
+run = 'move-node-to-workspace ;' 
+
+[[on-window-detected]]
+if.app-id = 'net.whatsapp.WhatsApp'
+run = 'move-node-to-workspace f'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'move-node-to-workspace v'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.MobileSMS'
+run = 'move-node-to-workspace g'
+
+[[on-window-detected]]
+if.app-id = 'org.torproject.torbrowser'
+run = 'move-node-to-workspace +'
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
+run = 'move-node-to-workspace o'
+
+
+[mode.service.binding]
+    esc = ['reload-config', 'mode main']
+    r = ['flatten-workspace-tree', 'mode main'] # reset layout
+    f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
+    backspace = ['close-all-windows-but-current', 'mode main']
+
+    # sticky is not yet supported https://github.com/nikitabobko/AeroSpace/issues/2
+    #s = ['layout sticky tiling', 'mode main']
+
+    alt-shift-h = ['join-with left', 'mode main']
+    alt-shift-j = ['join-with down', 'mode main']
+    alt-shift-k = ['join-with up', 'mode main']
+    alt-shift-l = ['join-with right', 'mode main']
+
+    down = 'volume down'
+    up = 'volume up'
+    shift-down = ['volume set 0', 'mode main']
+
+[mode.resize.binding]
+    h = 'resize width -50'
+    j = 'resize height +50'
+    k = 'resize height -50'
+    l = 'resize width +50'
+    z = 'fullscreen'
+    enter = 'mode main'
+    esc = 'mode main'
