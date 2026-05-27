@@ -1,4 +1,5 @@
 return { -- Fuzzy Finder (files, lsp, etc)
+	enabled = false,
 	'nvim-telescope/telescope.nvim',
 	-- Disabled for the keymaps
 	-- cmd = 'Telescope',

@@ -1,5 +1,6 @@
 directory=$(
-	fd . ~/code ~/ ~/school/typst/ -H -t d --maxdepth 1 | \
+	{
+		fd . ~/dev ~/ ~/areas ~/projects -t d --maxdepth 1 | \
 	awk '{
     short=$0
     sub("^/Users/toby/", "", short)
@@ -11,7 +12,10 @@ directory=$(
         short = first "/" rest
     }
     print short "\t" $0
-}' | fzf-tmux -p 80%,80% --with-nth=1 --delimiter=$'\t' | cut -f2
+}'
+
+printf ".config\t$HOME/.config"
+} | fzf-tmux -p 80%,80% --with-nth=1 --delimiter=$'\t' | cut -f2
 )
 
 if [[ -z "$directory" ]]; then

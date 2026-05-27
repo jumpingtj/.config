@@ -4,4 +4,7 @@ vim.lsp.enable({
 	'gopls',
 	'pyright',
 	'bashls',
+	'zls',
+	'ts_ls',
+	'cssls',
 })

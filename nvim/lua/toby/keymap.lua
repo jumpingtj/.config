@@ -5,6 +5,7 @@ vim.keymap.set('n', '<leader>z', '<cmd>ZenMode<CR>')
 vim.keymap.set('n', '<leader>a', '<cmd>Atone<CR>')
 vim.keymap.set('n', '<leader>p', '<cmd>TypstPreview<CR>')
 vim.keymap.set('n', '<leader>c', '<cmd>CsvViewToggle<CR>')
+vim.keymap.set('n', '<leader>w', '<cmd>write<CR>')
 vim.keymap.set('n', '<leader>m', function()
 	vim.cmd 'update'
 	for k in pairs(package.loaded) do

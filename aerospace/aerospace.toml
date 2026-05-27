@@ -1,11 +1,25 @@
+config-version = 2
+
 start-at-login = true
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
-accordion-padding = 0
+accordion-padding = 20
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 key-mapping.preset = 'qwerty'
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
+persistent-workspaces = [
+'TERM',
+'BROWSER',
+'HELIUM',
+'MESSAGES',
+'WHATSAPP',
+'ONEPASSWORD',
+'CHATGPT',
+'FINDER',
+'MAIL',
+'TOR',
+]
 
 # Run Sketchybar together with AeroSpace
 # sketchybar has a built-in detection of already running process,
@@ -31,66 +45,84 @@ outer.right = 0
 [mode.main.binding]
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout tiles horizontal horizontal'
+alt-4 = 'layout accordion'
 alt-cmd-m = 'resize smart -50'
 alt-cmd-i = 'resize smart +50'
 alt-shift-h = 'move-mouse monitor-force-center'
 
-alt-ctrl-h = 'focus left'
-alt-ctrl-j = 'focus down'
-alt-ctrl-k = 'focus up'
-alt-ctrl-l = 'focus right'
+ctrl-h = 'exec-and-forget /Users/toby/.config/aerospace/move-left.sh'
+ctrl-j = 'exec-and-forget /Users/toby/.config/aerospace/move-down.sh'
+ctrl-k = 'exec-and-forget /Users/toby/.config/aerospace/move-up.sh'
+ctrl-l = 'exec-and-forget /Users/toby/.config/aerospace/move-right.sh'
 
 alt-1 = 'workspace 1'
 alt-2 = 'workspace 2'
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
 
-alt-j = ['workspace j', 'exec-and-forget open -a kitty']
-alt-k = ['workspace k', 'exec-and-forget open -a Zen']
-alt-semicolon = ['workspace ;', 'exec-and-forget open -a "Home Assistant"']
-alt-g = ['workspace g', 'exec-and-forget open -a Messages']
-alt-f = ['workspace f', 'exec-and-forget open -a WhatsApp']
-alt-p = ['workspace p', 'exec-and-forget open -a 1Password']
-alt-v = ['workspace v', 'exec-and-forget open -a Finder']
-alt-s = ['workspace s', 'exec-and-forget open -a Settings']
-alt-shift-equal = ['workspace +', 'exec-and-forget open -a "Tor Browser"']
-alt-o = ['workspace o', 'exec-and-forget open -a ChatGPT']
+# alt-j = ['workspace j', 'exec-and-forget open -a kitty']
+# alt-k = ['workspace k', 'exec-and-forget open -a Zen']
+# alt-semicolon = ['workspace ;', 'exec-and-forget open -a "Home Assistant"']
+# alt-g = ['workspace g', 'exec-and-forget open -a Messages']
+# alt-f = ['workspace f', 'exec-and-forget open -a WhatsApp']
+# alt-p = ['workspace p', 'exec-and-forget open -a 1Password']
+# alt-v = ['workspace v', 'exec-and-forget open -a Finder']
+# alt-s = ['workspace s', 'exec-and-forget open -a Settings']
+# alt-shift-equal = ['workspace +', 'exec-and-forget open -a "Tor Browser"']
+# alt-o = ['workspace o', 'exec-and-forget open -a ChatGPT']
+
+alt-j = 'exec-and-forget /Users/toby/.config/aerospace/goto-app-workspace.sh --repair TERM net.kovidgoyal.kitty'
+alt-k = 'exec-and-forget /Users/toby/.config/aerospace/goto-app-workspace.sh --repair BROWSER app.zen-browser.zen'
+alt-l = 'exec-and-forget /Users/toby/.config/aerospace/goto-app-workspace.sh --repair HELIUM net.imput.helium'
+alt-g = 'exec-and-forget /Users/toby/.config/aerospace/goto-app-workspace.sh --repair MESSAGES com.apple.MobileSMS'
+alt-f = 'exec-and-forget /Users/toby/.config/aerospace/goto-app-workspace.sh --repair WHATSAPP net.whatsapp.WhatsApp'
+alt-p = 'exec-and-forget /Users/toby/.config/aerospace/goto-app-workspace.sh --repair ONEPASSWORD com.1password.1password'
+alt-o = 'exec-and-forget /Users/toby/.config/aerospace/goto-app-workspace.sh --repair CHATGPT com.openai.chat'
+alt-v = 'exec-and-forget /Users/toby/.config/aerospace/goto-app-workspace.sh --repair FINDER com.apple.finder'
+alt-m = 'exec-and-forget /Users/toby/.config/aerospace/goto-app-workspace.sh --repair MAIL com.apple.mail'
+alt-shift-8 = 'exec-and-forget /Users/toby/.config/aerospace/goto-app-workspace.sh --repair TOR com.torproject.torbrowser'
+alt-s = 'exec-and-forget /Users/toby/.config/aerospace/goto-app-workspace.sh --repair SETTINGS com.apple.systempreferences'
 
 
 
 alt-a = 'mode service'
 alt-r = 'mode resize'
 
-[[on-window-detected]]
-if.app-id = 'net.kovidgoyal.kitty'
-run = 'move-node-to-workspace j' 
+# [[on-window-detected]]
+# if.app-id = 'net.kovidgoyal.kitty'
+# run = 'move-node-to-workspace j' 
+#
+# [[on-window-detected]]
+# if.app-id = 'app.zen-browser.zen'
+# run = 'move-node-to-workspace k' 
+#
+# [[on-window-detected]]
+# if.app-id = 'io.robbie.HomeAssistant'
+# run = 'move-node-to-workspace ;' 
+#
+# [[on-window-detected]]
+# if.app-id = 'net.whatsapp.WhatsApp'
+# run = 'move-node-to-workspace f'
+#
+# [[on-window-detected]]
+# if.app-id = 'com.apple.finder'
+# run = 'move-node-to-workspace v'
+#
+# [[on-window-detected]]
+# if.app-id = 'com.apple.MobileSMS'
+# run = 'move-node-to-workspace g'
+#
+# [[on-window-detected]]
+# if.app-id = 'org.torproject.torbrowser'
+# run = 'move-node-to-workspace +'
+#
+# [[on-window-detected]]
+# if.app-id = 'com.openai.chat'
+# run = 'move-node-to-workspace o'
 
-[[on-window-detected]]
-if.app-id = 'app.zen-browser.zen'
-run = 'move-node-to-workspace k' 
-
-[[on-window-detected]]
-if.app-id = 'io.robbie.HomeAssistant'
-run = 'move-node-to-workspace ;' 
-
-[[on-window-detected]]
-if.app-id = 'net.whatsapp.WhatsApp'
-run = 'move-node-to-workspace f'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = 'move-node-to-workspace v'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.MobileSMS'
-run = 'move-node-to-workspace g'
-
-[[on-window-detected]]
-if.app-id = 'org.torproject.torbrowser'
-run = 'move-node-to-workspace +'
-[[on-window-detected]]
-if.app-id = 'com.openai.chat'
-run = 'move-node-to-workspace o'
+# [[on-window-detected]]
+# if.app-id = 'com.1password.1password'
+# run = 'move-node-to-workspace p'
 
 
 [mode.service.binding]

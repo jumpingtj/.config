@@ -1,3 +1,4 @@
 return {
-  'rktjmp/lush.nvim',
+	enabled = false,
+	'rktjmp/lush.nvim',
 }

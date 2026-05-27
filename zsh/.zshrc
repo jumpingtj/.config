@@ -135,7 +135,7 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 
 hash -d zrc=~/.config/zsh/.zshrc
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export PATH="$PATH:/Users/toby/.local/bin"
+export PATH="/Users/toby/.local/bin:$PATH"
 
 y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -143,6 +143,33 @@ y() {
 	IFS= read -r -d '' cwd < "$tmp"
 	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
+}
+
+alias slc='read -r msg && printf "%s\0" "$msg" | xargs -0 sl commit -m'
+
+mkz() {
+	mkdir $1;
+	z $1
+}
+
+# define function that retrieves and runs last command
+function run-again {
+    # get previous history item
+    zle up-history
+    # confirm command
+    zle accept-line
+}
+
+# define run-again widget from function of the same name
+zle -N run-again
+
+bindkey -M viins "^g" run-again 
+bindkey -M vicmd "^g" run-again
+
+typstart() {
+	typst init @local/start $1
+	z $1
+	v main.typ
 }
 
 # if [ -z "$TMUX" ] && [ "$TERM" = "xterm-kitty" ]; then

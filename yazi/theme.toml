@@ -1,7 +1,7 @@
 # Catppuccin Mocha Blue. https://github.com/catppuccin/yazi/blob/main/themes/mocha/catppuccin-mocha-blue.toml
 [app]
-# Slight change - Switch OG bg to 14151d
-overall = { bg = "#14151d" }
+# Slight change - Switch OG bg to black
+overall = { bg = "#000000" }
 
 [mgr]
 cwd = { fg = "#94e2d5" }
